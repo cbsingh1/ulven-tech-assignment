@@ -1,7 +1,12 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,9 +20,17 @@ public class FileGenTest {
     }
 
     @Test
+    @DisplayName("File should be generated for succesful flow")
     public void testFileExists() {
+        fileGenApp.generateFile(1);
         File file = new File("output.txt");
         assertTrue(file.exists());
+    }
+
+    @Test
+    public void countLines() throws IOException {
+        fileGenApp.generateFile(1);
+        assertEquals(1, Files.lines(Paths.get("output.txt"), Charset.defaultCharset()).count());
     }
 
     @Test

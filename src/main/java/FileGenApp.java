@@ -19,9 +19,11 @@ public class FileGenApp {
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(fileName), "utf-8"))) {
 
-            for (int i = 0; i <lines ; i++) {
-                writer.write(generateString(STRING_SIZE));
+            writer.write(generateString(STRING_SIZE));
+
+            for (int i = 0; i <lines-1 ; i++) {
                 writer.write(System.getProperty( "line.separator" ));
+                writer.write(generateString(STRING_SIZE));
             }
         } catch (IOException e) {
             e.printStackTrace();
